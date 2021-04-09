@@ -1,73 +1,65 @@
 <template>
-  <div>
-    <nav
-      class="navbar header has-shadow is-primary"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div class="navbar-brand">
-        <a
-          class="navbar-item"
-          href="/"
-        >
-          <img
-            src="~assets/buefy.png"
-            alt="Buefy"
-            height="28"
-          >
-        </a>
-
-        <div class="navbar-burger">
-          <span />
-          <span />
-          <span />
+  <div class="columns is-mobile">
+    <div class="column is-half is-offset-one-quarter">
+      <nav class="navbar is-white is-spaced" role="navigation" aria-label="dropdown navigation">
+        <div class="navbar-brand">
+          <div class="navbar-item not-affect">
+            <p class="is-size-4 has-text-weight-bold has-text-primary">
+              Neptuno Planner
+            </p>
+          </div>
+          <div class="navbar-burger burger" :class="{ 'is-active' : showNav }" data-target="navbarExampleTransparentExample" @click="showNav = !showNav">
+            <span />
+            <span />
+            <span />
+          </div>
         </div>
-      </div>
-    </nav>
+        <div class="navbar-menu" :class="{ 'is-active' : showNav }">
+          <div class="navbar-start">
+            <b-navbar-item v-for="(item, key) of items" :key="key" tag="router-link" :to="item.to">
+              {{ item.title }}
+            </b-navbar-item>
+          </div>
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="button is-primary">
+                  <strong>Sign up</strong>
+                </a>
+                <a class="button is-light">
+                  Log in
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
 
-    <section class="main-content columns">
-      <aside class="column is-2 section">
-        <p class="menu-label is-hidden-touch">
-          General
-        </p>
-        <ul class="menu-list">
-          <li
-            v-for="(item, key) of items"
-            :key="key"
-          >
-            <nuxt-link
-              :to="item.to"
-              exact-active-class="is-active"
-            >
-              <b-icon :icon="item.icon" /> {{ item.title }}
-            </nuxt-link>
-          </li>
-        </ul>
-      </aside>
-
-      <div class="container column is-10">
-        <nuxt />
-      </div>
-    </section>
+      <Nuxt />
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'Navbar',
   data () {
     return {
       items: [
         {
           title: 'Home',
-          icon: 'home',
           to: { name: 'index' }
         },
         {
-          title: 'Inspire',
-          icon: 'lightbulb',
-          to: { name: 'inspire' }
+          title: 'Tasks',
+          to: { name: 'tasks' }
+        },
+        {
+          title: 'Profile',
+          to: { name: 'profile' }
         }
-      ]
+      ],
+      showNav: false
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <div class="columns is-mobile">
+    <div class="columns is-desktop">
       <card
         title="Free"
         icon="github"
